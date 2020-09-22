@@ -1,4 +1,4 @@
-# **PHASED DIPLOID GENOME ASEMBLY PIPELINE** <br/>
+# **PHASED DIPLOID GENOME ASSEMBLY PIPELINE** <br/>
 This pipeline is designed to take Long-read and illumina sequencing data of a heterozygous diploid and provide a phased diploid assembly <br/>
 This has been tested on *S.cerevisiae* with nanopore data
 It appears to work well with strains containing at least 0.2% heterozygosity, an average long-read length of 8kb and >60X coverage. <br/>
@@ -18,7 +18,7 @@ Both parents have reference quality assemblies for comparison (https://doi.org/1
 The essential pipeline has 10 steps: <br/>
 1. *De-novo* genome assembly using long-reads <br/>
 2. Genome polishing using long (Racon and Medaka) and short (Pilon) reads <br/>
-2.5 RECOMMENDED STEP: Scaffolding and negative-gap closing <br/>
+2.5 RECOMMENDED STEP: Scaffolding, negative-gap closing and extra contig purging <br/>
 3. Alignment of long-reads to assembly to generate bam file <br/>
 4. Variant calling using illumina reads to generate a vcf containing heterozygous variants <br/>
 5. Input of bam and vcf into whatshap to phase variants <br/>
@@ -27,7 +27,7 @@ The essential pipeline has 10 steps: <br/>
 8. Arbitrarily combining blocks and unphased reads to generate haplotypes read sets <br/>
 9. *De-novo* assembly and long-read polishing of each haplotype seperately <br/>
 10. Illumina read polishing of diploid genome <br/>
-10.5 RECOMMENDED STEP AGAIN: Scaffolding and negative-gap closing <br/>
+10.5 RECOMMENDED STEP AGAIN: Scaffolding, negative-gap closing and extra contig purging <br/>
 
 long-read data = long_reads.fq.gz (do not have test set currently MAYBE CAN LOOK AT USING THE HYBRID MADE IN THE LAB) <br/>
 Illumina data = illumina_1.fq.gz and illumina_2.fq.gz
@@ -164,7 +164,7 @@ Assemblers without read-correction benefit from two more additional rounds of Ra
 	# et viola, the polished assembly
 	mv SO002_haploid.pilon.fasta SO002_haploid.canu_r1_m2_p3.fa
 
-### **2.5 RECOMMENDED STEP: Scaffolding and negative gap closing** <br/>
+### **2.5 RECOMMENDED STEP: Scaffolding, negative-gap closing and extra contig purging** <br/>
 This step is to connect contigs that may be 'phased-over', by scaffolding and/or removing contig overlaps which may represent haplotype differences or errors <br/>
 Additionally, depending on your assembly, some small haplotigs may have already been generated. With canu this commonly occur, particularily around heterozygous SVs. Therefore scaffolding against a reference can simplify the process of removing haplotigs <br/>
 A simple referencing scaffolding procedure uses ragout, RaGOO or RagTag and a repeat masked reference genome <br/>
@@ -408,7 +408,7 @@ One easy way to check the the illumina reads are properly aligning to their hapl
 	sed 's/_pilon_pilon_pilon//g' |\
 	grep -A 1 'HP2' > SO002_HP2.canu_r1_m2_p3.fa
 
-### **10.5 RECOMMENDED STEP AGAIN: Scaffolding and negative gap closing** <br/>
+### **10.5 RECOMMENDED STEP AGAIN: Scaffolding, negative-gap closing and extra contig purging** <br/>
 What we can do now is seperate the haplotype assemblies based on the HPx tag given to the contigs before merging <br/>
 Then seperately treat them seperately for scaffolding, removing redundant contigs etc <br/>
 Here I scaffold etc again as above (step 2.5) for both haplotype genomes seperately <br/>
