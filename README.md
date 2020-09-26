@@ -5,8 +5,8 @@ It appears to work well with strains containing at least 0.2% heterozygosity, an
 **_NOTE: Example commands below use S.cerevisiae and nanopore specifications if required by the tool_** <br/>
 **_NOTE: All tools/commands used or suggested are easy to install and use on a linux distibution_** <br/>
 The test data (strain SO002) comes from a cross between stable haploids YLF161 and YLF132 (https://doi.org/10.1002/yea.2991) from West African (DVBPG6044) and North American (YPS128) backgrounds respectively <br/>
+Provided in the google drive folder below are nanopore reads (long_reads.fq.gz), basecalled by guppy (v3.4.5) and with adapter and barcodes removed using porechop <br/>
 https://drive.google.com/drive/folders/1IkuQMK5FLbndHcrX8vhoCPzKWePJleAl?usp=sharing <br/>
-Provided are nanopore reads (long_reads.fq.gz), basecalled by guppy (v3.4.5) and with adapter and barcodes removed using porechop <br/>
 176,003 reads <br/>
 106X coverage <br/>
 4,402 median length <br/>
