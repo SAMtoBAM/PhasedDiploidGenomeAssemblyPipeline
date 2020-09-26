@@ -5,6 +5,9 @@ It appears to work well with strains containing at least 0.2% heterozygosity, an
 **_NOTE: Example commands below use S.cerevisiae and nanopore specifications if required by the tool_** <br/>
 **_NOTE: All tools/commands used or suggested are easy to install and use on a linux distibution_** <br/>
 The test data (strain SO002) comes from a cross between stable haploids YLF161 and YLF132 (https://doi.org/10.1002/yea.2991) from West African (DVBPG6044) and North American (YPS128) backgrounds respectively <br/>
+Both parents have reference quality assemblies for comparison (https://doi.org/10.1038/ng.3847)
+
+
 Provided in the google drive folder below are nanopore reads (long_reads.fq.gz), basecalled by guppy (v3.4.5) and with adapter and barcodes removed using porechop <br/>
 https://drive.google.com/drive/folders/1IkuQMK5FLbndHcrX8vhoCPzKWePJleAl?usp=sharing <br/>
 176,003 reads <br/>
@@ -12,7 +15,8 @@ https://drive.google.com/drive/folders/1IkuQMK5FLbndHcrX8vhoCPzKWePJleAl?usp=sha
 4,402 median length <br/>
 7,277 mean length <br/>
 12,519 N50 <br/>
-Both parents have reference quality assemblies for comparison (https://doi.org/10.1038/ng.3847)
+and illumina data (illumina_1.fq.gz and illumina_2.fq.gz)
+
 
 
 The essential pipeline has 10 steps: <br/>
@@ -29,21 +33,19 @@ The essential pipeline has 10 steps: <br/>
 10. Illumina read polishing of diploid genome <br/>
 10.5 RECOMMENDED STEP AGAIN: Scaffolding, negative-gap closing and extra contig purging <br/>
 
-long-read data = long_reads.fq.gz (do not have test set currently MAYBE CAN LOOK AT USING THE HYBRID MADE IN THE LAB) <br/>
-Illumina data = illumina_1.fq.gz and illumina_2.fq.gz
 
 ## **1. *De-novo* genome assembly using long-reads** <br/>
 The assembler of choice is at to your discretion. <br/>
 For this example I will use canu (best results with latest, at the time, version v2) at is has proved to work very well in the case of *S.cerevisiae* <br/>
     
-	##downsample entire reads to 40x using filtlong, selecting for the longest reads
+	##downsample entire reads to 40x using filtlong, selecting for the longest reads and removing any reads shorter than 1kb
 	filtlong long_reads.fq.gz --length_weight 10 --min_length 1000 -t 480000000 | gzip > ./long_reads_fl.fq.gz
 	## Canu assembly
 	# predicted assembly size is based on the haploid genome size of S.cerevisiae
-	# perhaps you need to add useGrid=false unless running on a configured cluster
 	canu -p SO002 \
 		-d SO002_haploid_canu_dir \
 		genomeSize=12m \
+		useGrid=false \
 		-nanopore long_reads_fl.fq.gz
 	# assembly is in SO002_haploid_canu_dir/SO002_haploid.contigs.fasta
 	mv SO002_haploid_canu_dir/SO002_haploid.contigs.fasta ./SO002_haploid.canu.fa
