@@ -4,7 +4,10 @@ This has been tested on *S.cerevisiae* with nanopore data
 It appears to work well with strains containing at least 0.2% heterozygosity, an average long-read length of 8kb and >60X coverage. <br/>
 **_NOTE: Example commands below use S.cerevisiae and nanopore specifications if required by the tool_** <br/>
 **_NOTE: All tools/commands used or suggested are easy to install and use on a linux distibution_** <br/>
-The test data (strain SO002) comes from a cross between stable haploids YLF161 and YLF132 (https://doi.org/10.1002/yea.2991) from West African (DVBPG6044) and North American (YPS128) backgrounds respectively <br/>
+
+The test data provided here (strain SO002) comes from a lab generated cross between stable haploids YLF161 and YLF132 (https://doi.org/10.1002/yea.2991) from West African (DVBPG6044) and North American (YPS128) backgrounds respectively <br/>
+After generating the diploid, it was then sequenced by nanopore and illumina <br/>
+This was to remove biases from generating diploids artificially through in silico read subset merging <br/>
 Both parents have reference quality assemblies for comparison (https://doi.org/10.1038/ng.3847)
 
 
