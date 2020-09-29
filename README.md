@@ -171,7 +171,7 @@ Assemblers without read-correction benefit from two more additional rounds of Ra
 
 ### **2.5 RECOMMENDED STEP: Scaffolding, negative-gap closing and extra contig purging** <br/>
 This step is to connect contigs that may be 'phased-over', by scaffolding and/or removing contig overlaps which may represent haplotype differences or errors <br/>
-Additionally, depending on your assembly, some small haplotigs may have already been generated. With canu this commonly occur, particularily around heterozygous SVs. Therefore scaffolding against a reference can simplify the process of removing haplotigs <br/>
+Additionally, depending on your assembly, some small haplotigs may have already been generated. With canu this commonly occurs, particularily around heterozygous SVs. Therefore scaffolding against a reference can simplify the process of removing haplotigs <br/>
 A simple referencing scaffolding procedure uses ragout, RaGOO or RagTag and a repeat masked reference genome <br/>
 Although tools like RaGOO and RagTag are much faster due to their use of minimap alignment, for a genome the size of cerevisiae, ragout is my choice <br/>
 This is mainly as RaGOO and RagTag generally overassemble (scaffolding small haplotigs to the main contig) and I cannot see how to stop it...<br/>
@@ -193,7 +193,7 @@ This is mainly as RaGOO and RagTag generally overassemble (scaffolding small hap
 	## select only the scaffolds/contigs associated with the reference by name (this assembly is within the google drive folder)
 	cat SO002_haploid.canu_polished_scaffolded.fa | awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);} END {printf("\n");}' | grep "\S" | sed 's/>chr_/>chr/g' | grep -A 1 'chr' > SO002_haploid.FINAL.fa
 
-An alternate path particularily for larger assemblies would be to use Purge Haplotigs followed by RagTag <br/>
+An alternate path, particularily for larger genomes, would be to use Purge Haplotigs followed by RagTag <br/>
 
 Additionally it has been found that some assemblies can fail to connect overlapping contigs, called negative-gaps <br/>
 Tools such as gap5 can be used in order to find end-to-end overlaps in contigs, further justified by side-by-side scaffolding, in order to join contigs and create a consensus at the overlap position <br/>
@@ -364,7 +364,7 @@ note that since this is a recent lab generated cross there is little Loss of het
 ## **8. Arbitrarily combining blocks and unphased reads to generate haplotypes read sets** <br/>
 On the assumption that the phasing is contiguous and that normV90 is close to 1, arbitrarily combining reads from blocks denoted haplotype 1 will combine a minimal number of read-blocks **within** a contig. Additionally one read-block will contain the vast majority of all variants within this contig. <br/>
 However due to LOH, only taking phased variants would eliminate reads within homozygous regions <br/>
-Therefore, assuming that a significant number of reads relative to the total number have been phased, the unphased reads can be added to both haplotype read sets in order to generate more complete haplotype assemblies <br/>
+Therefore, assuming that a significant number of reads relative to the total number have been phased, the unphased/haplotype-less reads can be added to both haplotype read sets in order to generate more complete haplotype assemblies <br/>
 
 	## Bash commands to join haplotypes
 	# get names of reads for both haplotypes
@@ -396,7 +396,7 @@ Illumina reads have not been phased and therefore it appears better to feed Pilo
 	cat $genomes | awk -v hp="$hp" '{if($0 ~ ">") print $1"_"hp ; else print $0}' >> SO002_diploid.canu_r1_m2.fa
 	done
 
-Now perform the same pilon polishing steps as previously using the diploid genome 'SO002_diploid.canu_r1_m2.fa' <br/>
+Now perform the same pilon polishing steps, as previously, using the diploid genome 'SO002_diploid.canu_r1_m2.fa' <br/>
 Easily you can just swap 'haploid' for 'diploid' <br/>
 Resulting in 'SO002_diploid.canu_r1_m2_p3.fa' <br/>
 One easy way to check the the illumina reads are properly aligning to their haplotype assembly is by checking how coverage per contig will be approxamitely half what it was compared to the haploid merged assembly. <br/>
@@ -432,6 +432,7 @@ I would be very interested if someone would automate this procedure more elegant
 The most difficult procedure to automate is the process of removing extra contigs produced during the haploid merged assembly step <br/>
 I use Ragout in this pipeline which generally works better than alternative tools for this pipeline, however, it often misses a contig or two and these need to be manually renamed in the frame of the reference <br/>
 Therefore I imagine that in an automated procedure that this step would prompt the user to check whether all the necessary contigs had been identified, perhaps with a dotplot showing the scaffolding results (this is how I check), so that the other contigs can then be removed before phasing <br/>
+Lastly, in general here a single assembler/assembly is chosen, however with assemblers becoming increasingly quicker, one can imagine, as I have done, using multiple assemblers simultaneuosly and selecting the best for phasing based on phasing statistics.
 
 I really hope this is helpful for someone <br/>
 I sure remember finding post like these very useful as I began to transition into the analysis of sequencing/assembly data <br/>
