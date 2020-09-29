@@ -1,6 +1,6 @@
 # **PHASED DIPLOID GENOME ASSEMBLY PIPELINE** <br/>
 This pipeline is designed to take Long-read and illumina sequencing data of a heterozygous diploid and provide a phased diploid assembly <br/>
-This has been tested on *S.cerevisiae* with nanopore data
+This has been tested on *S.cerevisiae* with nanopore data <br/>
 It appears to work well with strains containing at least 0.2% heterozygosity, an average long-read length of 8kb and >60X coverage. <br/>
 **_NOTE: Example commands below use S.cerevisiae and nanopore specifications if required by the tool_** <br/>
 **_NOTE: All tools/commands used or suggested are easy to install and use on a linux distibution_** <br/>
