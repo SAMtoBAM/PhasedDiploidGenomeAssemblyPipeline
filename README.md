@@ -387,6 +387,7 @@ Finishing with genomes 'SO002_HP1.canu_r1_m2.fa' and 'SO002_HP2.canu_r1_m2.fa'
     
 
 ## **10. Illumina read polishing of diploid genome** <br/>
+**EDIT: I NOW RECOMMEND USING HAPO-G IN ORDER TO POLISH EACH HAPLOID ASSEMBLY SEPERATELY. BASED ON MANY PHASED ASSEMBLIES, THIS THOROUGHLY IMPROVES IDENTITY FOR EACH HAPLOTYPE AND SUBSEQUENTLY ANNOTATION** <br/>
 Illumina reads have not been phased and therefore it appears better to feed Pilon the combined haplotype assemblies for polishing <br/>
 
 	## Join haplotype assemblies into diploid assembly (need to rename contigs)
