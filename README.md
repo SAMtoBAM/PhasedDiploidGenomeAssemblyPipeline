@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/290861112.svg)](https://zenodo.org/badge/latestdoi/290861112)
+
 # **PHASED DIPLOID GENOME ASSEMBLY PIPELINE** <br/>
 This pipeline is designed to take Long-read and illumina sequencing data of a heterozygous diploid and provide a phased diploid assembly <br/>
 This has been tested on *S.cerevisiae* with nanopore data <br/>
