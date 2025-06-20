@@ -13,8 +13,7 @@ This was to remove biases from generating diploids artificially through in silic
 Both parents have reference quality assemblies for comparison (https://doi.org/10.1038/ng.3847)
 
 
-Provided in the google drive folder below are nanopore reads (long_reads.fq.gz), basecalled by guppy (v3.4.5) and with adapter and barcodes removed using porechop <br/>
-https://drive.google.com/drive/folders/1IkuQMK5FLbndHcrX8vhoCPzKWePJleAl?usp=sharing <br/>
+Provided in the [zenodo repository](https://zenodo.org/records/15707526) are nanopore reads (long_reads.fq.gz), basecalled by guppy (v3.4.5) and with adapter and barcodes removed using porechop <br/>
 176,003 reads <br/>
 106X coverage <br/>
 4,402 median length <br/>
