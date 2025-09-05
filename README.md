@@ -437,5 +437,6 @@ Therefore I imagine that in an automated procedure that this step would prompt t
 Lastly, in general here a single assembler/assembly is chosen, however with assemblers becoming increasingly quicker, one can imagine, as I have done, using multiple assemblers simultaneuosly and selecting the best for phasing based on phasing statistics.
 
 I really hope this is helpful for someone <br/>
+If you do find it useful, I'd appreciate it if you citated the [publication](https://doi.org/10.1038/s41588-023-01459-y) for which this pipeline was developed and used 
 I sure remember finding post like these very useful as I began to transition into the analysis of sequencing/assembly data <br/>
 Email address is samuel.a.odonnell@gmail.com for anything not fitting of opening an issue
